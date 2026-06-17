@@ -1,0 +1,90 @@
+/* chat_styles.css - Add this to style.css or create separate file */
+/* ChatGPT-style chat interface */
+
+/* Chat message styling */
+.stChatMessage {
+    padding: 16px;
+    margin: 8px 0;
+    border-radius: 18px;
+    max-width: 85%;
+    word-wrap: break-word;
+}
+
+/* User messages */
+.stChatMessage[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageContent"]:first-child) {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+/* Assistant messages */
+.stChatMessage[data-testid="stChatMessage"]:has(div[data-testid="stChatMessageContent"]:last-child) {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chat input */
+.stChatInput > div > div {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 25px;
+    border: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.stChatInput > div > div:focus-within {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Typing indicator */
+@keyframes typing {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.typing-indicator::after {
+    content: '▌';
+    animation: typing 1s infinite;
+    font-weight: bold;
+}
+
+/* Markdown styling in chat */
+.stChatMessage .stMarkdown {
+    color: inherit !important;
+}
+
+.stChatMessage .stMarkdown a {
+    color: #00f2ff !important;
+    text-decoration: underline;
+}
+
+.stChatMessage .stMarkdown strong {
+    color: #ffd700;
+}
+
+.stChatMessage .stMarkdown ul, 
+.stChatMessage .stMarkdown ol {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.stChatMessage .stMarkdown li {
+    margin: 4px 0;
+}
+
+/* Code blocks in chat */
+.stChatMessage .stCodeBlock {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    margin: 8px 0;
+}
+
+/* Chat header */
+.stTabs [aria-selected="true"][data-baseweb="tab"][aria-label*="Chat"] {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%) !important;
+    border-bottom: 2px solid #00f2ff !important;
+}

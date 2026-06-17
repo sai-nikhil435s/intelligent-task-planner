@@ -1,0 +1,26 @@
+Set-Content -Path (Join-Path (Get-Location) ".gitignore") -Value "# Secrets and environment
+.env
+_env
+env
+.env.*
+
+# Database files
+*.db
+chroma_db/
+chroma_db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# OS files
+.DS_Store
+Thumbs.db"

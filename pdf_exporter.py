@@ -1,0 +1,280 @@
+# pdf_exporter.py
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib import colors
+from io import BytesIO
+from datetime import datetime
+import json
+
+class PDFExporter:
+    @staticmethod
+    def generate_task_pdf(user_request: str, subtasks: list, filename: str = None):
+        """
+        Generate a professional PDF report from task decomposition.
+        
+        Args:
+            user_request: The original user request
+            subtasks: List of subtask dictionaries
+            filename: Optional filename for saving
+            
+        Returns:
+            BytesIO buffer with PDF content
+        """
+        buffer = BytesIO()
+        
+        # Create PDF document
+        doc = SimpleDocTemplate(
+            buffer,
+            pagesize=A4,
+            rightMargin=72,
+            leftMargin=72,
+            topMargin=72,
+            bottomMargin=72
+        )
+        
+        # Container for PDF elements
+        elements = []
+        styles = getSampleStyleSheet()
+        
+        # Custom styles
+        title_style = ParagraphStyle(
+            'CustomTitle',
+            parent=styles['Heading1'],
+            fontSize=24,
+            spaceAfter=30,
+            alignment=1  # Center
+        )
+        
+        subtitle_style = ParagraphStyle(
+            'CustomSubtitle',
+            parent=styles['Heading2'],
+            fontSize=14,
+            spaceAfter=20,
+            textColor=colors.HexColor('#4CAF50')
+        )
+        
+        task_title_style = ParagraphStyle(
+            'TaskTitle',
+            parent=styles['Heading3'],
+            fontSize=12,
+            spaceAfter=6,
+            textColor=colors.HexColor('#2196F3')
+        )
+        
+        normal_style = ParagraphStyle(
+            'Normal',
+            parent=styles['Normal'],
+            fontSize=10,
+            spaceAfter=12
+        )
+        
+        # Add title
+        elements.append(Paragraph("Task Decomposition Report", title_style))
+        elements.append(Paragraph(f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M')}", styles['Normal']))
+        elements.append(Spacer(1, 20))
+        
+        # User Request section
+        elements.append(Paragraph("User Request", subtitle_style))
+        elements.append(Paragraph(f'"{user_request}"', normal_style))
+        elements.append(Spacer(1, 30))
+        
+        # Subtasks section
+        elements.append(Paragraph(f"Subtasks ({len(subtasks)})", subtitle_style))
+        
+        for i, subtask in enumerate(subtasks, 1):
+            # Task header
+            priority = subtask.get('priority', 'Medium')
+            duration = subtask.get('duration', 'N/A')
+            
+            elements.append(Paragraph(
+                f"Subtask {i}: {subtask.get('title', f'Task {i}')}",
+                task_title_style
+            ))
+            
+            # Priority and duration in a small table
+            priority_data = [
+                ['Priority:', priority, 'Duration:', duration]
+            ]
+            priority_table = Table(priority_data, colWidths=[1*inch, 1*inch, 1*inch, 1*inch])
+            priority_table.setStyle(TableStyle([
+                ('FONTNAME', (0, 0), (-1, -1), 'Helvetica-Bold'),
+                ('FONTSIZE', (0, 0), (-1, -1), 9),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 6),
+            ]))
+            elements.append(priority_table)
+            
+            # Explanation
+            explanation = subtask.get('explanation', '')
+            if not explanation:
+                explanation = subtask.get('description', 'No description provided.')
+            
+            elements.append(Paragraph("Description:", styles['Heading4']))
+            elements.append(Paragraph(explanation, normal_style))
+            
+            # Resources
+            resources = subtask.get('resources', [])
+            if resources:
+                elements.append(Paragraph("Resources:", styles['Heading4']))
+                for resource in resources[:4]:  # Limit to 4 resources
+                    if isinstance(resource, dict):
+                        name = resource.get('name', 'Unnamed Resource')
+                        link = resource.get('link', '')
+                        if link:
+                            elements.append(Paragraph(f"• {name}: {link}", normal_style))
+                        else:
+                            elements.append(Paragraph(f"• {name}", normal_style))
+            
+            elements.append(Spacer(1, 20))
+        
+        # Footer
+        elements.append(Spacer(1, 30))
+        elements.append(Paragraph(
+            "Generated by Intelligent Agent System",
+            ParagraphStyle(
+                'Footer',
+                parent=styles['Normal'],
+                fontSize=8,
+                alignment=1,
+                textColor=colors.gray
+            )
+        ))
+        
+        # Build PDF
+        doc.build(elements)
+        buffer.seek(0)
+        
+        # Save to file if filename provided
+        if filename:
+            with open(filename, 'wb') as f:
+                f.write(buffer.getvalue())
+            buffer.seek(0)
+        
+        return buffer
+    
+    @staticmethod
+    def generate_simple_pdf(user_request: str, subtasks: list):
+        """
+        Generate a simpler PDF for quick download.
+        """
+        buffer = BytesIO()
+        c = canvas.Canvas(buffer, pagesize=A4)
+        width, height = A4
+        
+        # Title
+        c.setFont("Helvetica-Bold", 18)
+        c.drawCentredString(width/2, height-50, "Task Breakdown Report")
+        c.setFont("Helvetica", 10)
+        c.drawString(40, height-80, f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        
+        # User Request
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(40, height-110, "User Request:")
+        c.setFont("Helvetica", 10)
+        
+        # Wrap long text
+        y = height-130
+        words = user_request.split()
+        line = ""
+        for word in words:
+            if c.stringWidth(line + word, "Helvetica", 10) < 500:
+                line += word + " "
+            else:
+                c.drawString(40, y, line)
+                y -= 15
+                line = word + " "
+        if line:
+            c.drawString(40, y, line)
+        y -= 30
+        
+        # Subtasks
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(40, y, f"Subtasks ({len(subtasks)}):")
+        y -= 30
+        
+        for i, subtask in enumerate(subtasks, 1):
+            if y < 100:  # New page if running out of space
+                c.showPage()
+                y = height - 50
+                c.setFont("Helvetica", 10)
+            
+            # Task title
+            c.setFont("Helvetica-Bold", 11)
+            title = f"{i}. {subtask.get('title', f'Task {i}')}"
+            c.drawString(50, y, title)
+            y -= 15
+            
+            # Priority and duration
+            c.setFont("Helvetica", 9)
+            priority = subtask.get('priority', 'Medium')
+            duration = subtask.get('duration', 'N/A')
+            c.drawString(60, y, f"Priority: {priority} | Duration: {duration}")
+            y -= 12
+            
+            # Description (truncated)
+            description = subtask.get('explanation', subtask.get('description', ''))
+            if len(description) > 150:
+                description = description[:150] + "..."
+            c.drawString(60, y, "Description:")
+            y -= 12
+            
+            # Wrap description
+            desc_lines = []
+            words = description.split()
+            line = ""
+            for word in words:
+                if c.stringWidth(line + word, "Helvetica", 9) < 450:
+                    line += word + " "
+                else:
+                    desc_lines.append(line)
+                    line = word + " "
+            if line:
+                desc_lines.append(line)
+            
+            for desc_line in desc_lines[:3]:  # Limit to 3 lines
+                c.drawString(70, y, desc_line.strip())
+                y -= 10
+            
+            y -= 10
+        
+        c.save()
+        buffer.seek(0)
+        return buffer
+
+if __name__ == "__main__":
+    # Test the PDF exporter
+    print("Testing PDF Exporter...")
+    
+    test_subtasks = [
+        {
+            "title": "Requirements Analysis",
+            "priority": "High",
+            "duration": "2 days",
+            "explanation": "In this subtask, the user should analyze project requirements.",
+            "resources": [
+                {"name": "Requirements Guide", "link": "https://example.com"},
+                {"name": "Project Template", "link": "https://example.com"}
+            ]
+        },
+        {
+            "title": "System Design",
+            "priority": "High",
+            "duration": "3 days",
+            "explanation": "In this subtask, the user should design the system architecture.",
+            "resources": [
+                {"name": "Design Patterns", "link": "https://example.com"}
+            ]
+        }
+    ]
+    
+    # Generate PDF
+    pdf_buffer = PDFExporter.generate_task_pdf(
+        "Build a web application for task management",
+        test_subtasks,
+        "test_report.pdf"
+    )
+    
+    print(f"✅ PDF generated successfully! Size: {len(pdf_buffer.getvalue())} bytes")

@@ -1,0 +1,619 @@
+
+/* Modern Dark Gradient UI Theme - Enhanced Visibility */
+
+/* Background Gradient */
+.stApp {
+    background: radial-gradient(circle at top left, #0a0e1a, #1a1a2e, #2d1b4e);
+    color: #ffffff !important;
+}
+
+/* Fix for text color throughout the app */
+.stMarkdown, .stText, .stExpander, .stColumn, .stDataFrame, .stMetric {
+    color: #ffffff !important;
+}
+
+/* Glassmorphism Cards & Containers */
+div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects for cards */
+div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div:hover {
+    border: 1px solid rgba(0, 242, 255, 0.4);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Buttons - Electric Blue / Violet Gradient */
+.stButton > button {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    color: white !important;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+    border: none;
+    color: white !important;
+}
+
+/* Disabled buttons */
+.stButton > button:disabled {
+    background: linear-gradient(135deg, #4a4d94 0%, #6d3b8e 100%) !important;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Inputs & Text Areas - High visibility */
+.stTextInput > div > div > input, 
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div > div,
+.stNumberInput > div > div > input {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(99, 102, 241, 0.3) !important;
+    border-radius: 12px !important;
+    color: #000000 !important;
+    font-weight: 500;
+    padding: 12px 16px !important;
+}
+
+/* Placeholder text visibility */
+.stTextInput > div > div > input::placeholder,
+.stTextArea > div > div > textarea::placeholder {
+    color: #666666 !important;
+    opacity: 0.8;
+}
+
+.stTextInput > div > div > input:focus, 
+.stTextArea > div > div > textarea:focus,
+.stSelectbox > div > div > div:focus,
+.stNumberInput > div > div > input:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+    outline: none !important;
+}
+
+/* Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px;
+    background-color: transparent;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 45px;
+    white-space: nowrap;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px 12px 0 0;
+    padding: 10px 20px;
+    color: #ffffff !important;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: -2px;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%) !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #00f2ff !important;
+}
+
+/* Expander Styling - WHITE HEADER as shown in image */
+.streamlit-expanderHeader {
+    background-color: #ffffff !important;
+    border-radius: 12px !important;
+    border: 1px solid #e0e0e0 !important;
+    color: #000000 !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Fix for expander header text color */
+.streamlit-expanderHeader p,
+.streamlit-expanderHeader div,
+.streamlit-expanderHeader span {
+    color: #000000 !important;
+}
+
+.streamlit-expanderContent {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 0 0 12px 12px !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    margin-top: -10px;
+    padding: 15px !important;
+}
+
+/* Sidebar Styling */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0a0e1a 0%, #1a1a2e 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 15px !important;
+}
+
+/* Sidebar text visibility */
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] .stText,
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4,
+section[data-testid="stSidebar"] p {
+    color: #ffffff !important;
+}
+
+/* Sidebar buttons */
+section[data-testid="stSidebar"] .stButton > button {
+    background: linear-gradient(135deg, #4a4d94 0%, #6d3b8e 100%);
+    margin: 5px 0;
+}
+
+/* Custom Alerts */
+.stAlert {
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 15px !important;
+}
+
+/* Success - Green */
+div[data-testid="stNotificationContentSuccess"] {
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    border-left: 4px solid #28a745 !important;
+    color: #90ee90 !important;
+}
+
+/* Warning - Yellow */
+div[data-testid="stNotificationContentWarning"] {
+    background-color: rgba(255, 193, 7, 0.15) !important;
+    border-left: 4px solid #ffc107 !important;
+    color: #ffd700 !important;
+}
+
+/* Info - Blue */
+div[data-testid="stNotificationContentInfo"] {
+    background-color: rgba(0, 123, 255, 0.15) !important;
+    border-left: 4px solid #00f2ff !important;
+    color: #00f2ff !important;
+}
+
+/* Error - Red */
+div[data-testid="stNotificationContentError"] {
+    background-color: rgba(220, 53, 69, 0.15) !important;
+    border-left: 4px solid #dc3545 !important;
+    color: #ff6b6b !important;
+}
+
+/* Table Styling */
+div[data-testid="stTable"] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+div[data-testid="stTable"] table {
+    color: #ffffff !important;
+}
+
+div[data-testid="stTable"] thead tr th {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #00f2ff !important;
+    font-weight: 600 !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid rgba(0, 242, 255, 0.3) !important;
+}
+
+div[data-testid="stTable"] tbody tr td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 10px 16px !important;
+}
+
+/* Hover effect for table rows */
+div[data-testid="stTable"] tbody tr:hover {
+    background-color: rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Dataframe Styling */
+.stDataFrame {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+/* Metric Cards */
+[data-testid="metric-container"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-testid="metric-value"] {
+    color: #00f2ff !important;
+    font-size: 28px !important;
+    font-weight: bold !important;
+}
+
+[data-testid="metric-label"] {
+    color: #ffffff !important;
+    opacity: 0.8;
+    font-size: 14px !important;
+}
+
+/* Radio buttons and Checkboxes */
+.stRadio > div, .stCheckbox > div {
+    color: #ffffff !important;
+}
+
+.stRadio > div > label, .stCheckbox > div > label {
+    color: #ffffff !important;
+}
+
+/* Progress bars */
+.stProgress > div > div > div {
+    background-color: #6366f1 !important;
+}
+
+/* Divider styling */
+hr {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    margin: 25px 0 !important;
+}
+
+/* Custom class for task history cards - REMOVED STYLING */
+.task-history-card {
+    /* Background removed for simple buttons */
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 10px 0;
+    border: none;
+    transition: none;
+}
+
+.task-history-card:hover {
+    /* Hover effects removed */
+    background: none;
+    border-color: none;
+    transform: none;
+}
+
+/* Fix for dropdown menus */
+div[role="listbox"] {
+    background-color: #1a1a2e !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+div[role="option"] {
+    color: #ffffff !important;
+}
+
+div[role="option"]:hover {
+    background-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.7);
+}
+
+/* Spinner styling */
+.stSpinner > div {
+    border-color: #6366f1 transparent transparent transparent !important;
+}
+
+/* Image containers */
+.stImage > img {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Code block styling */
+.stCodeBlock pre {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Link styling */
+a {
+    color: #00f2ff !important;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+/* FIX FOR SIDEBAR EXPANDER COLOR ISSUE */
+
+/* Sidebar expander headers should be dark with white text */
+section[data-testid="stSidebar"] .streamlit-expanderHeader {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Fix for expander header text color in sidebar */
+section[data-testid="stSidebar"] .streamlit-expanderHeader p,
+section[data-testid="stSidebar"] .streamlit-expanderHeader div,
+section[data-testid="stSidebar"] .streamlit-expanderHeader span,
+section[data-testid="stSidebar"] .streamlit-expanderHeader strong,
+section[data-testid="stSidebar"] .streamlit-expanderHeader label {
+    color: #ffffff !important;
+}
+
+/* Sidebar expander content */
+section[data-testid="stSidebar"] .streamlit-expanderContent {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 0 0 12px 12px !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    margin-top: -10px;
+    padding: 15px !important;
+}
+
+/* Ensure all text in sidebar expander content is visible */
+section[data-testid="stSidebar"] .streamlit-expanderContent p,
+section[data-testid="stSidebar"] .streamlit-expanderContent div,
+section[data-testid="stSidebar"] .streamlit-expanderContent span,
+section[data-testid="stSidebar"] .streamlit-expanderContent strong,
+section[data-testid="stSidebar"] .streamlit-expanderContent small,
+section[data-testid="stSidebar"] .streamlit-expanderContent ul,
+section[data-testid="stSidebar"] .streamlit-expanderContent li {
+    color: #ffffff !important;
+}
+
+/* Make sure the expander icon is visible */
+section[data-testid="stSidebar"] .streamlit-expanderHeader svg {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+}
+
+/* Quick Stats specific styling */
+section[data-testid="stSidebar"] .streamlit-expanderHeader[aria-label="📊 Quick Stats"],
+section[data-testid="stSidebar"] .streamlit-expanderHeader[aria-label*="Quick Stats"] {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%) !important;
+    border: 1px solid rgba(99, 102, 241, 0.4) !important;
+}
+
+/* Task Details expander in sidebar */
+section[data-testid="stSidebar"] .streamlit-expanderHeader[aria-label*="Task Details"],
+section[data-testid="stSidebar"] .streamlit-expanderHeader[aria-label*="Details"] {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Force white text on all sidebar elements */
+section[data-testid="stSidebar"] *:not(input):not(textarea):not(select) {
+    color: #ffffff !important;
+}
+
+/* Override any black text in sidebar */
+section[data-testid="stSidebar"] [style*="color: black"],
+section[data-testid="stSidebar"] [style*="color: #000"],
+section[data-testid="stSidebar"] [style*="color: #000000"] {
+    color: #ffffff !important;
+}
+
+/* Fix for any remaining black text */
+section[data-testid="stSidebar"] {
+    color: #ffffff !important;
+}
+
+/* Ensure expander chevron is white */
+section[data-testid="stSidebar"] .streamlit-expanderHeader .st-emotion-cache-1p1m4ay {
+    color: #ffffff !important;
+}
+
+/* Fix for expander header focus state */
+section[data-testid="stSidebar"] .streamlit-expanderHeader:focus {
+    border-color: #6366f1 !important;
+}
+
+/* Recent Tasks section specific fixes */
+section[data-testid="stSidebar"] h2[data-testid="stHeader"] {
+    color: #ffffff !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Divider styling in sidebar */
+section[data-testid="stSidebar"] hr {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    margin: 20px 0 !important;
+}
+
+/* Make sure buttons in sidebar expanders have proper text */
+section[data-testid="stSidebar"] .stButton > button {
+    color: #ffffff !important;
+}
+
+/* Fix for any text that might be inheriting black color */
+section[data-testid="stSidebar"] .st-emotion-cache-1wivap2 {
+    color: #ffffff !important;
+}
+
+/* Override the global white header style for sidebar only */
+section[data-testid="stSidebar"] .streamlit-expanderHeader {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+/* Add ChatGPT-style chat interface styling */
+
+/* Chat container */
+div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div > div[data-testid="stVerticalBlock"] {
+    background: transparent !important;
+}
+
+/* Chat messages */
+[data-testid="stChatMessage"] {
+    padding: 16px !important;
+    margin: 12px 0 !important;
+    border-radius: 18px !important;
+    max-width: 85% !important;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* User messages - blue gradient */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"]:first-child) {
+    background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%) !important;
+    color: white !important;
+    margin-left: auto !important;
+    margin-right: 20px !important;
+    border-bottom-right-radius: 4px !important;
+    box-shadow: 0 2px 10px rgba(0, 122, 255, 0.3);
+}
+
+/* Assistant messages - dark with border */
+[data-testid="stChatMessage"]:has([data-testid="stChatMessageContent"]:last-child) {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px);
+    color: white !important;
+    margin-right: auto !important;
+    margin-left: 20px !important;
+    border-bottom-left-radius: 4px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Chat input */
+section[data-testid="stChatInput"] {
+    position: sticky !important;
+    bottom: 0 !important;
+    background: linear-gradient(transparent, rgba(10, 14, 26, 0.9)) !important;
+    padding-top: 20px !important;
+    z-index: 100 !important;
+}
+
+[data-testid="stChatInput"] > div > div {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 25px !important;
+    border: 2px solid rgba(99, 102, 241, 0.3) !important;
+    backdrop-filter: blur(10px);
+}
+
+[data-testid="stChatInput"] > div > div:focus-within {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Typing animation */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.typing-cursor::after {
+    content: '▌';
+    animation: blink 1s infinite;
+    font-weight: bold;
+    color: #6366f1;
+}
+
+/* Chat message content */
+[data-testid="stChatMessageContent"] {
+    color: inherit !important;
+}
+
+[data-testid="stChatMessageContent"] a {
+    color: #00f2ff !important;
+    text-decoration: underline;
+}
+
+[data-testid="stChatMessageContent"] a:hover {
+    color: white !important;
+}
+
+/* Lists in chat */
+[data-testid="stChatMessageContent"] ul,
+[data-testid="stChatMessageContent"] ol {
+    margin: 8px 0 !important;
+    padding-left: 20px !important;
+}
+
+[data-testid="stChatMessageContent"] li {
+    margin: 4px 0 !important;
+}
+
+/* Code in chat */
+[data-testid="stChatMessageContent"] code {
+    background: rgba(0, 0, 0, 0.3) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Headings in chat */
+[data-testid="stChatMessageContent"] h1,
+[data-testid="stChatMessageContent"] h2,
+[data-testid="stChatMessageContent"] h3,
+[data-testid="stChatMessageContent"] h4 {
+    color: #00f2ff !important;
+    margin-top: 16px !important;
+    margin-bottom: 8px !important;
+}
+
+/* Example prompts styling */
+div[data-testid="stExpander"] details {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.task-meta{
+font-size:0.85rem;
+color:#9ca3af;
+margin-bottom:8px;
+}
+.task-description{
+font-size:0.95rem;
+line-height:1.7;
+color:#e5e7eb;
+}
